@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:newsapp1/core/assetsmang.dart';
 
 class Homedrawer extends StatefulWidget {
   final void Function() backhome;
@@ -48,7 +49,7 @@ class _HomedrawerState extends State<Homedrawer> {
                   },
                   child: Row(
                     children: [
-                      SvgPicture.asset("assetName", height: 24.h, width: 24.w),
+                      SvgPicture.asset(Assetsmang.home, height: 24.h, width: 24.w),
                       SizedBox(width: 8.w),
                       Text(
                         "Go to home ",
@@ -66,10 +67,10 @@ class _HomedrawerState extends State<Homedrawer> {
                 SizedBox(height: 24.h),
                 Row(
                   children: [
-                    SvgPicture.asset("assetName", height: 24.h, width: 24.w),
+                    SvgPicture.asset(Assetsmang.lang, height: 24.h, width: 24.w),
                     SizedBox(width: 8.w),
                     Text(
-                      "Theme",
+                      "Language",
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20.sp,
@@ -87,14 +88,14 @@ class _HomedrawerState extends State<Homedrawer> {
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
-                      value: selectedtheme,
+                      value: selectedlang,
                       borderRadius: BorderRadius.circular(16.r),
                       isExpanded: true,
                       iconDisabledColor: Colors.white,
                       iconEnabledColor: Colors.white,
                       dropdownColor: Colors.black,
                       hint: Text(
-                        "choose the Theme",
+                        "choose the Language",
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.sp,
@@ -107,12 +108,12 @@ class _HomedrawerState extends State<Homedrawer> {
                         color: Colors.white,
                       ),
                       items: [
-                        DropdownMenuItem(value: "light", child: Text("Light")),
-                        DropdownMenuItem(value: "dark", child: Text("Dark")),
+                        DropdownMenuItem(value: "En", child: Text("English")),
+                        DropdownMenuItem(value: "Ar", child: Text("Arbic")),
                       ],
                       onChanged: (value) {
                         setState(() {
-                          selectedtheme = value!;
+                          selectedlang = value!;
                         });
                       },
                     ),
@@ -123,7 +124,7 @@ class _HomedrawerState extends State<Homedrawer> {
                 SizedBox(height: 24.h),
                 Row(
                   children: [
-                    SvgPicture.asset("assetName", height: 24.h, width: 24.w),
+                    SvgPicture.asset(Assetsmang.theme, height: 24.h, width: 24.w),
                     SizedBox(width: 8.w),
                     Text(
                       "Theme",

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsapp1/core/colormang.dart';
-import 'package:newsapp1/model/categorymodel.dart';
+import 'package:newsapp1/data/model/categorymodel.dart';
 import 'package:newsapp1/ui/categories/widget/categoryitem.dart';
 
 class Categorieswidget extends StatelessWidget {

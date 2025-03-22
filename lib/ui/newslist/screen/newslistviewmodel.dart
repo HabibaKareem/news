@@ -1,32 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsapp1/core/remote/apimanger.dart';
 
-import 'package:newsapp1/model/sorcesresponse/sourse.dart';
+import 'package:newsapp1/data/model/sorcesresponse/sourse.dart';
+import 'package:newsapp1/repo/sourcesrepo.dart';
 
-class Newslistviewmodel extends ChangeNotifier {
-List<Source>sources=[];
-String? errormess;
-bool showloading=false;
-getsource(String categoryid)async{
+class Newslistviewmodel extends Cubit<Newsstate>  {
+  SourcesRepo sourcesRepo;
+Newslistviewmodel(this.sourcesRepo):super(newsloading());
+
+  getsource(String categoryid)async{
+    
+//print(sourceid);
+
    try{
-      showloading=true;
+    emit(newsloading());
 
-   var response=await  Apimanger.getsource(categoryid);
+   var response= await  sourcesRepo.getsource(categoryid);
+  // print(response?.sources.toList().map((source) => print(source.name)));
+  
     if(response?.status=="error"){
-errormess =response?.message;
+      emit(newserror(response!.message!));
     }
     else{
-      sources = response?.sources??[];
+     emit(newssuccess(response?.sources??[]));
 }
-   showloading=false;
+  
 
     }
     
     catch(e){
-errormess=e.toString();
-showloading=false;
-}
-notifyListeners();
+  emit(newserror(e.toString()+" cache"));
 }
 
 }
+}
+ abstract class Newsstate{}
+ class newsloading extends Newsstate{}
+  class newserror extends Newsstate{
+
+    String error;
+    newserror(this.error);
+  }
+   class newssuccess extends Newsstate{
+    List<Source> sources;
+    newssuccess(this.sources);
+   }

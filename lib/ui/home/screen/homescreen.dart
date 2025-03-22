@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:newsapp1/model/categorymodel.dart';
+import 'package:newsapp1/core/assetsmang.dart';
+import 'package:newsapp1/data/model/categorymodel.dart';
 import 'package:newsapp1/ui/categories/screen/categorieswidget.dart';
 import 'package:newsapp1/ui/home/widget/homedrawer.dart';
 import 'package:newsapp1/ui/newslist/screen/newslistwidget.dart';
@@ -34,7 +35,7 @@ class _HomescreenState extends State<Homescreen> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: SvgPicture.asset("assetName", height: 24.h, width: 24.w),
+            icon: SvgPicture.asset(Assetsmang.search, height: 24.h, width: 24.w),
           ),
         ],
       ),

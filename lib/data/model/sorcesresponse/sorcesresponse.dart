@@ -1,7 +1,6 @@
-import 'package:newsapp1/model/sorcesresponse/sourse.dart';
+import 'package:newsapp1/data/model/sorcesresponse/sourse.dart';
 
-class SourceResponse {
-  String status;
+class SourceResponse { String status;
   String code;
   String message;
   List<Source> sources;
@@ -31,4 +30,3 @@ class SourceResponse {
     };
   }
 }
-

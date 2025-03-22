@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsapp1/core/remote/apimanger.dart';
-import 'package:newsapp1/model/artresponce/article.dart';
-import 'package:newsapp1/model/sorcesresponse/sourse.dart';
+import 'package:newsapp1/data/model/artresponce/article.dart';
+import 'package:newsapp1/data/model/sorcesresponse/sourse.dart';
 
 import 'package:newsapp1/ui/newslist/widget/articleitem.dart';
 import 'package:newsapp1/ui/newslist/widget/articlelistviewmodel.dart';
@@ -10,7 +11,7 @@ import 'package:provider/provider.dart';
 
 class Articlelist extends StatefulWidget {
   Source source;
-  Articlelist(this.source, {super.key});
+  Articlelist(this.source);
 
   @override
   State<Articlelist> createState() => _ArticlelistState();
@@ -20,52 +21,54 @@ class _ArticlelistState extends State<Articlelist> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => Articlelistviewmodel()..getarticle(widget.source.id!),
-      child: Consumer<Articlelistviewmodel>(builder: (context,viewmodel, child) {
-         if(viewmodel.showloading){
-        return Center(child: CircularProgressIndicator());
-
-       }
-       else if(viewmodel.errormess!=null){
+   print(widget. source.id);
+    return  BlocProvider(
+      
+      create: (context) =>Articlelistviewmodel()..getarticle(widget.source.id) ,
+      child: BlocBuilder<Articlelistviewmodel,Articlestate>
+      (builder: (context, state) {
+        if(state is Articleloading){
+     return Center(child: CircularProgressIndicator());
+        }
+        else if(state is Articleerror){
 return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(viewmodel.errormess.toString()),
+              Text(state.error),
               ElevatedButton(
                 onPressed: () {
                   setState(() {});
                 },
-                child: Text("cancel"),
+                child: Text("cance"),
               ),
             ],
           );
-       }
-
-
-       else{
-        
-       List<Article> articles =viewmodel.articles??[];
-       if(articles.isEmpty){
-        return Center(
+        }
+        else if(state is Articleempty){
+return Center(
           child: Text("No articles found",
           style: TextStyle(
             fontSize: 30.sp,
             fontWeight: FontWeight.w600
           ),),
         );
-       }
-        
-       return
-        ListView.separated(
-      itemBuilder: (context, index) => Articleitem(article: articles[index],),
-      separatorBuilder: (context, index) => SizedBox(height: 10.h),
-      itemCount: articles.length,
+        }
+        else {
+          var articles =(state as Articlesuccess).articles;
+           return
+        Expanded(
+          child: ListView.separated(
+                itemBuilder: (context, index) =>//Text("data")
+                Articleitem(article: articles[index],)
+                
+                ,
+                separatorBuilder: (context, index) => SizedBox(height: 10.h),
+                itemCount: articles.length,
+              ),
+        );
+        }
+      },),
     );
-       }
-
-      },),);
-    
     
     /*
     

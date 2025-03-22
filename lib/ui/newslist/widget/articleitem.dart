@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsapp1/core/colormang.dart';
-import 'package:newsapp1/model/artresponce/article.dart';
+import 'package:newsapp1/data/model/artresponce/article.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class Articleitem extends StatelessWidget {
@@ -15,61 +15,68 @@ class Articleitem extends StatelessWidget {
     return InkWell(
       onTap: () {
         showDialog(
+          
           context: context,
           builder:
               (context) => AlertDialog(
-                contentPadding: REdgeInsets.all(0),
+                
+                contentPadding: REdgeInsets.all(16),
                 insetPadding: REdgeInsets.all(16),
                 alignment: Alignment.bottomCenter,
                 backgroundColor: Colormang.textcolor,
                 content: SizedBox(
                   width: ScreenUtil().screenWidth,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8.r),
-
-                        child: CachedNetworkImage(
-                          imageUrl: article.urlToImage??"",
-                          height: 220.h,
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          placeholder:
-                              (context, url) =>
-                                  Center(child: CircularProgressIndicator()),
-                          errorWidget:
-                              (context, url, error) =>
-                                  Icon(Icons.error, size: 40.sp),
-                        ),
-                      ),
-                      SizedBox(height: 8.h),
-                      Text(
-                        article.description??"",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(height: 8.h),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                        ),
-                        child: Text(
-                          "view full article",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16.sp,
-                            color: Colormang.textcolor,
+                  child: Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(height: 400.h,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.r),
+                                              
+                            child: CachedNetworkImage(
+                              imageUrl: article.urlToImage??"",
+                              height: 100.h,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              placeholder:
+                                  (context, url) =>
+                                      Center(child: CircularProgressIndicator()),
+                              errorWidget:
+                                  (context, url, error) =>
+                                      Icon(Icons.error, size: 40.sp),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 8.h),
+                        Text(
+                          article.description??"",
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 4,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14.sp,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                          ),
+                          child: Text(
+                            "view full article",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16.sp,
+                              color: Colormang.textcolor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -81,23 +88,27 @@ class Articleitem extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.r),
           border: Border.all(color: Colormang.textcolor),
         ),
-        child: Column(
+        child:// Text("data")
+        Column(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.r),
-
-              child: CachedNetworkImage(
-                imageUrl: article.urlToImage??"",
-                height: 220.h,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                placeholder:
-                    (context, url) =>
-                        Center(child: CircularProgressIndicator()),
-                errorWidget:
-                    (context, url, error) => Icon(Icons.error, size: 40.sp),
+//            Expanded(child: 
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.r),
+              
+                child: CachedNetworkImage(
+                  imageUrl: article.urlToImage??"",
+                  height: 220.h,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  placeholder:
+                      (context, url) =>
+                          Center(child: CircularProgressIndicator()),
+                  errorWidget:
+                      (context, url, error) => Icon(Icons.error, size: 40.sp),
+                ),
               ),
-            ),
+              
+ //           ),
             SizedBox(height: 10.h),
             Text(
               article.title??"",
@@ -142,6 +153,8 @@ class Articleitem extends StatelessWidget {
                 ),
               ],
             ),
+
+            
           ],
         ),
       ),

@@ -8,7 +8,7 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
 }
-
+//flutter run -d edge
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   // This widget is the root of your application.
@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: Appstyle.lighttheme,
 

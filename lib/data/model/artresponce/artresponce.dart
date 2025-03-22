@@ -1,13 +1,13 @@
-import 'package:newsapp1/model/artresponce/article.dart';
+import 'package:newsapp1/data/model/artresponce/article.dart';
 
-class ArticleResponse {
+ class ArticleResponse  {
   String status;
   String? code;
   String? message;
   int totalResults;
   List<Article> articles;
 
-  ArticleResponse({
+  ArticleResponse ({
     required this.status,
     this.code,
     this.message,
@@ -15,8 +15,8 @@ class ArticleResponse {
     required this.articles,
   });
 
-  factory ArticleResponse.fromJson(Map<String, dynamic> json) {
-    return ArticleResponse(
+  factory ArticleResponse .fromJson(Map<String, dynamic> json) {
+    return ArticleResponse (
       status: json['status'],
       code: json['code'],
       message: json['message'],
